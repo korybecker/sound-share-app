@@ -8,17 +8,21 @@ import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import UpdateProfile from "./UpdateProfile";
 import ForgotPassword from "./ForgotPassword";
+import Sounds from "./Sounds";
+import UploadSound from "./UploadSound";
+import Navbar from "./Navbar";
 
 const App = () => {
   return (
     <>
-      <Container
-        className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "100vh" }}
-      >
-        <div className="w-100" style={{ maxWidth: "400px" }}>
-          <Router>
-            <AuthProvider>
+      <AuthProvider>
+        <Navbar />
+        <Container
+          className="d-flex align-items-center justify-content-center"
+          style={{ minHeight: "100vh" }}
+        >
+          <div className="w-100" style={{ maxWidth: "400px" }}>
+            <Router>
               <Routes>
                 <Route
                   exact
@@ -37,14 +41,24 @@ const App = () => {
                     </PrivateRoute>
                   }
                 />
+                <Route
+                  path="upload-sound"
+                  element={
+                    <PrivateRoute>
+                      <UploadSound />
+                    </PrivateRoute>
+                  }
+                />
+
                 <Route path="signup" element={<Signup />} />
                 <Route path="login" element={<Login />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
+                <Route path="sounds" element={<Sounds />} />
               </Routes>
-            </AuthProvider>
-          </Router>
-        </div>
-      </Container>
+            </Router>
+          </div>
+        </Container>
+      </AuthProvider>
     </>
   );
 };
